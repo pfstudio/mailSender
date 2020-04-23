@@ -27,7 +27,7 @@ public class MailSender {
     public static void send(UserInfo userInfo) {
         Properties props = new Properties();
         // 开启debug调试
-        props.setProperty("mail.debug", "false");
+        props.setProperty("mail.debug", "true");
         // 发送服务器需要身份验证
         props.setProperty("mail.smtp.auth", "true");
         // 设置邮件服务器主机名
@@ -84,7 +84,12 @@ public class MailSender {
             transport.close();
         } catch (MessagingException e) {
             e.printStackTrace();
-            logger.info("给 {} 的邮件发送失败", userInfo.getName());
+            logger.warn("给 [{}] 的邮件发送失败，该用户账号为 [{}], 密码为 [{}], 专业为 [{}], 学号为 [{}]",
+                    userInfo.getName(),
+                    userInfo.getAccount(),
+                    userInfo.getPassword(),
+                    userInfo.getMajor(),
+                    userInfo.getStuNumber());
         }
     }
 }

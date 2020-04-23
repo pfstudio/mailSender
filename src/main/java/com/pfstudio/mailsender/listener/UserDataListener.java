@@ -36,8 +36,13 @@ public class UserDataListener extends AnalysisEventListener<UserInfo> {
      */
     @Override
     public void invoke(UserInfo data, AnalysisContext context) {
-        logger.info("读取到数据 {}",data.toString());
+        // logger.info("读取到数据 {}",data.toString());
         MailSender.send(data);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
